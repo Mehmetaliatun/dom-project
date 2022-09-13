@@ -8,7 +8,10 @@ console.log(randomNumber);
 
 //? Variables
 let score = 10;
-let topScore = 0;
+// let topScore = 0;
+
+//? localstrage'da topScore adiyla bir degisken olusturur.
+let topScore = localStorage.getItem("topScore") || 0;
 
 //* when press the checkbtn do the controls
 document.querySelector(".check-btn").addEventListener("click", () => {
@@ -16,6 +19,7 @@ document.querySelector(".check-btn").addEventListener("click", () => {
   //   console.log(guessInput);
   const msg = document.querySelector(".msg");
   const body = document.querySelector("body");
+
   //?if no input alert the user
   if (!guessInput) {
     msg.innerText = "Please enter a number";
@@ -26,7 +30,8 @@ document.querySelector(".check-btn").addEventListener("click", () => {
     body.className = "bg-success";
     document.querySelector(".check-btn").disabled = true;
     if (score > topScore) {
-      topScore = score;
+      //   topScore = score;
+      localStorage.setItem("topScore", score);
       document.querySelector(".top-score").textContent = topScore;
     }
     document.querySelector(".secret-number").textContent = randomNumber;
@@ -71,3 +76,12 @@ document.querySelector(".again-btn").addEventListener("click", () => {
 //! else if
 //! if score  >0
 //!
+
+myObj = { a: 1, b: 2, c: 3 };
+localStorage.setItem("OBJ", JSON.stringify(myObj));
+
+const readObj = localStorage.getItem("OBJ");
+const readOBJ = JSON.parse(localStorage.getItem("OBJ"));
+console.log(typeof readObj);
+console.log(typeof readOBJ);
+console.log(readOBJ);
