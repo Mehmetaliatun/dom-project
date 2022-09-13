@@ -2,9 +2,7 @@
 //*  GUESS MY NUMBER
 //*  Game Logic
 //*======================================
-
 //? 1-100 random number
-
 const randomNumber = Math.round(Math.random() * 100);
 console.log(randomNumber);
 
@@ -26,6 +24,7 @@ document.querySelector(".check-btn").addEventListener("click", () => {
     msg.innerHTML = `Congrats You Win <i class="fa-regular fa-face-grin-stars fa-2x"></i>`;
     // document.querySelector("body").style.background = "green";
     body.className = "bg-success";
+    document.querySelector(".check-btn").disabled = true;
     if (score > topScore) {
       topScore = score;
       document.querySelector(".top-score").textContent = topScore;
@@ -47,6 +46,20 @@ document.querySelector(".check-btn").addEventListener("click", () => {
 
     document.querySelector(".score").textContent = score;
   }
+});
+
+//* again basildiginda oyunun baslangic degerlerini kur
+
+document.querySelector(".again-btn").addEventListener("click", () => {
+  score = 10;
+  document.querySelector(".score").textContent = score;
+  const randomNumber = Math.round(Math.random() * 100);
+  document.querySelector(".secret-number").textContent = "?";
+  console.log(randomNumber);
+  document.querySelector(".check-btn").disabled = false;
+  document.querySelector("body").classList.remove("bg-success", "bg-danger");
+  document.querySelector(".guess-input").value = "";
+  document.querySelector(".msg").innerText = `Starting..`;
 });
 
 //? cong. u guess
