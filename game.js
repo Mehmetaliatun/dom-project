@@ -23,7 +23,7 @@ document.querySelector(".check-btn").addEventListener("click", () => {
     msg.innerText = "Please enter a number";
     //! eger rasgele == input.value
   } else if (randomNumber === guessInput) {
-    msg.innerHTML = `Congrats You Win <i class="fa-regular fa-face-grin-stars"></i>`;
+    msg.innerHTML = `Congrats You Win <i class="fa-regular fa-face-grin-stars fa-2x"></i>`;
     // document.querySelector("body").style.background = "green";
     body.className = "bg-success";
     if (score > topScore) {
@@ -31,16 +31,24 @@ document.querySelector(".check-btn").addEventListener("click", () => {
       document.querySelector(".top-score").textContent = topScore;
     }
     document.querySelector(".secret-number").textContent = randomNumber;
+    //! if random ==input.value
   } else {
-    score--;
+    if (score > 0) {
+      score--;
+      guessInput > randomNumber
+        ? (msg.innerHTML = `<i class="fa-solid fa-arrow-trend-down fa-2x"></i> DECREASE`)
+        : (msg.innerHTML = `<i class="fa-solid fa-arrow-trend-up fa-2x"></i> INCREASE`);
+    } else {
+      msg.innerHTML = `You lost <i class="fa-regular fa-face-dizzy fa-2x"></i>`;
+      document.querySelector(".secret-number").textContent = randomNumber; // kayıp sonrasi random sayiyi gorme
+      body.className = "bg-danger";
+      document.querySelector(".check-btn").disabled = true;
+    }
 
-    guessInput > randomNumber
-      ? (msg.innerText = "DECREASE")
-      : (msg.innerText = "INCREASE");
+    document.querySelector(".score").textContent = score;
   }
 });
 
-//! if random ==input.value
 //? cong. u guess
 //? background green / success
 //?if score>topscore
